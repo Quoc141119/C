@@ -101,16 +101,17 @@ int main(int argc, char** argv) {
 		cin>>player1;
 		cout<<"Enter Player 2 Name: ";
 		cin>>player2;
-		
 		for(int i=0; i<9; i++){
+			system("cls");
+			show(a);
 			int arr;
-			
 			if(i%2==0){
 				do{
 					cout<<"Your Turn "<<player1<<" - O: ";
 					cin>>arr;
 				}while(check_dd(a,arr)==0);
 				a[arr/10][arr%10]='O';
+				system("cls");
 				show(a);
 				if(checkwin(a,arr,i) == 1){
 					cout<<player1<<" WIN\n";
@@ -124,7 +125,8 @@ int main(int argc, char** argv) {
 					cout<<"Your Turn "<<player2<<" - X: ";
 					cin>>arr;
 				}while(check_dd(a,arr)==0);
-				a[arr/10][arr%10]='X';	
+				a[arr/10][arr%10]='X';
+				system("cls");	
 				show(a);
 				if(checkwin(a,arr,i) == 1){
 					cout<<player2<<" WIN\n";
