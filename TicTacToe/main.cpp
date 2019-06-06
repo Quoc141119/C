@@ -1,7 +1,11 @@
 #include <cstdlib>
 #include <iostream> 
-using namespace std; 
+using namespace std;
 
+
+// change do kho cua game
+const int maxarray = 10;
+int sizearray = 100; 
 
 int welcome(){
 	int c;
@@ -12,29 +16,32 @@ int welcome(){
 	return c;
 }
 
-void show(char a[3][3]){
-	for(int i=0;i<3;i++){
-		for(int j=0;j<3;j++){
-			cout<<a[i][j]<<"  ";
+void showarray(char a[maxarray][maxarray]){
+	for(int i=0;i<maxarray;i++){
+		for(int j=0;j<maxarray;j++){
+			if(a[i][j]!='X' && a[i][j]!='O')
+				cout<<"-"<<"  ";
+			else
+				cout<<a[i][j]<<"  ";
 		}		
 		cout<<endl;
 	}
 }
 
-int check_dd(char a[3][3], int b){
-	if(b/10>2 || b/10<0 || b%10>2){
+//check vi tri danh co hop le khong
+int check_dd(char a[maxarray][maxarray], int b){
+	if(b/10>(maxarray-1) || b/10<0 || b%10>(maxarray-1)){
 		cout<<"khong xac dinh duoc vi tri\n";
 		return 0;
 	}
-	if(a[b/10][b%10]!='*'){
+	if(a[b/10][b%10]=='X' || a[b/10][b%10]=='O'){
 		cout<<"Vi tri da duoc chon\n";
 		return 0;
 	}
 	return 1;
 }
 
-
-int checkwin(char a[3][3], int b, int c){
+int checkwin(char a[maxarray][maxarray], int b, int c){
 	char x;
 	int check = 1;
 	
@@ -44,7 +51,7 @@ int checkwin(char a[3][3], int b, int c){
 		x ='X';	
 	
 	//check ngang	
-	for(int j = 0; j<3; j++){
+	for(int j = 0; j<maxarray; j++){
 		if(a[b/10][j]!=x){
 			check = 0;
 			break;
@@ -54,7 +61,7 @@ int checkwin(char a[3][3], int b, int c){
 	//check doc
 	if(check == 0){
 		check = 1;
-		for(int j = 0; j<3; j++){
+		for(int j = 0; j<maxarray; j++){
 			if(a[j][b%10]!=x){
 				check = 0;
 				break;
@@ -66,7 +73,7 @@ int checkwin(char a[3][3], int b, int c){
 	if(check == 0){
 		if(b%10==b/10){	
 			check = 1;
-			for(int j=0; j<3; j++){
+			for(int j=0; j<maxarray; j++){
 				if(a[j][j]!=x){
 					check = 0;
 					break;
@@ -76,11 +83,10 @@ int checkwin(char a[3][3], int b, int c){
 	}
 	
 	if(check == 0){
-		if((b%10)+(b/10)==2){
+		if((b%10)+(b/10)==maxarray-1){
 			check = 1;
-			for(int j=0; j<3; j++){
-				cout<<"xu ly check cheo\n";
-				if(a[j][2-j]!=x){
+			for(int j=0; j<maxarray; j++){
+				if(a[j][maxarray-1-j]!=x){
 					check = 0;
 					break;
 				}			
@@ -92,7 +98,7 @@ int checkwin(char a[3][3], int b, int c){
 }
 
 int main(int argc, char** argv) {
-	char a[3][3]={'*','*','*','*','*','*','*','*','*'};
+	char a[maxarray][maxarray];
 	char player1[20], player2[20];
 	int win = 0;
 	
@@ -101,9 +107,9 @@ int main(int argc, char** argv) {
 		cin>>player1;
 		cout<<"Enter Player 2 Name: ";
 		cin>>player2;
-		for(int i=0; i<9; i++){
+		for(int i=0; i<sizearray; i++){
 			system("cls");
-			show(a);
+			showarray(a);
 			int arr;
 			if(i%2==0){
 				do{
@@ -112,7 +118,7 @@ int main(int argc, char** argv) {
 				}while(check_dd(a,arr)==0);
 				a[arr/10][arr%10]='O';
 				system("cls");
-				show(a);
+				showarray(a);
 				if(checkwin(a,arr,i) == 1){
 					cout<<player1<<" WIN\n";
 					cout<<"CHUC MUNG NHE !!!";
@@ -127,7 +133,7 @@ int main(int argc, char** argv) {
 				}while(check_dd(a,arr)==0);
 				a[arr/10][arr%10]='X';
 				system("cls");	
-				show(a);
+				showarray(a);
 				if(checkwin(a,arr,i) == 1){
 					cout<<player2<<" WIN\n";
 					cout<<"CHUC MUNG NHE !!!";
@@ -140,5 +146,6 @@ int main(int argc, char** argv) {
 	
 	if(win==0)
 		cout<<"HOA ROI NHE !!!";
+		
 	return 0;
 }
