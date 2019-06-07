@@ -187,6 +187,7 @@ void play(){
 
 int main(int argc, char** argv) {
 	if(welcome()==1)
-		play();			
+		play();	
+	system("pause");
 	return 0;
 }
