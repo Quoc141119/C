@@ -1,0 +1,6 @@
+
+1         quoc         3
+2         quoc         4
+1         quoc         3
+2         quoc b         3
+3         quoc c         7
