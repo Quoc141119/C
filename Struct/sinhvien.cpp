@@ -2,18 +2,17 @@
 #include <iomanip>
 #include <string>
 #include <fstream>
-#include <vector>
 using namespace std;
 
 int Menu();
 void Input();
 void Display();
-int Checkid(int);
-int Checkscore(float);
-void Savefile();
-void Loadfile();
+int CheckId(int);
+int CheckScore(float);
+void SaveFile();
+void LoadFile();
 
-typedef struct Student{
+struct Student{
 	int id;
 	string name;
 	float score;
@@ -47,7 +46,7 @@ void Input() {
 		do {
 			cout << "ID: ";
 			cin >> id;
-		} while (Checkid(id) == 1);
+		} while (CheckId(id) == 1);
 		student->id = id;
 		cin.ignore();
 		cout << "Name: ";
@@ -55,7 +54,7 @@ void Input() {
 		do {
 			cout << "Score: ";
 			cin >> score;
-		} while (Checkscore(score) == 1);
+		} while (CheckScore(score) == 1);
 		student->score = score;
 		student++;
 	}
@@ -70,7 +69,7 @@ void Display() {
 	}
 }
 
-int Checkid(int id) {
+int CheckId(int id) {
 	Student *student = sv;
 	while (student->id != NULL) {
 		if (student->id == id) {
@@ -82,7 +81,7 @@ int Checkid(int id) {
 	return 0;
 }
 
-int Checkscore(float score) {
+int CheckScore(float score) {
 	if (score<0.0 || score>10.0) {
 		cout << "score not invalid.\n";
 		return 1;
@@ -90,13 +89,13 @@ int Checkscore(float score) {
 	return 0;
 }
 
-void Savefile() {
+void SaveFile() {
 	Student *student = sv;
 	ofstream outfile;
-	outfile.open("Text.txt", ios::app);
+	outfile.open("Text.txt", ios::out);
 	if (outfile.is_open()) {
 		while (student->id != NULL) {
-			outfile << student->id << "         " << student->name << "         " << student->score << endl;
+			outfile << student->id << " " << student->name << " " << student->score << endl;
 			student++;
 		}
 	}
@@ -106,14 +105,22 @@ void Savefile() {
 	outfile.close();
 }
 
-void Loadfile() {
+void LoadFile() {
+	Student *student = sv;
 	string line;
 	ifstream infile;
 	infile.open("Text.txt", ios::in);
 	if (infile.is_open()) {
 		while (!infile.eof()) {
-			getline(infile, line);
-			cout << line << endl;
+			infile >> line;
+			int id = atoi(line.c_str());
+			student->id = id;
+			infile >> line;
+			student->name = line;
+			infile >> line;
+			float score = atoi(line.c_str());
+			student->score = score;
+			student++;
 		}
 	}
 	else {
@@ -134,10 +141,10 @@ int main() {
 			Display();
 			break;
 		case 3:
-			Savefile();
+			SaveFile();
 			break;
 		case 4:
-			Loadfile();
+			LoadFile();
 			break;
 	}
 
