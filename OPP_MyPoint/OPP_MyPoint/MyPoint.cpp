@@ -38,6 +38,11 @@ int MyPoint::GetY()
 	return this->mPosY;
 }
 
+float MyPoint::Distance(MyPoint p)
+{
+	return sqrt(pow((this->GetX() - p.GetX()), 2) + pow((this->GetY() - p.GetY()), 2));
+}
+
 MyPoint::~MyPoint()
 {
 }
