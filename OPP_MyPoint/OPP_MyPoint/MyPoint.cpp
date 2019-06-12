@@ -13,6 +13,10 @@ MyPoint::MyPoint()
 {
 }
 
+void MyPoint::Display()
+{
+	std::cout << mPosX << " " << mPosY << std::endl;
+}
 
 MyPoint::~MyPoint()
 {
