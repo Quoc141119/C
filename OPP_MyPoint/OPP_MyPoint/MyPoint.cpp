@@ -18,6 +18,26 @@ void MyPoint::Display()
 	std::cout << mPosX << " " << mPosY << std::endl;
 }
 
+void MyPoint::SetX(int x)
+{
+	this->mPosX = x;
+}
+
+int MyPoint::GetX()
+{
+	return this->mPosX;
+}
+
+void MyPoint::SetY(int y)
+{
+	this->mPosY = y;
+}
+
+int MyPoint::GetY()
+{
+	return this->mPosY;
+}
+
 MyPoint::~MyPoint()
 {
 }
