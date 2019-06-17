@@ -5,60 +5,82 @@
 
 VirusDengue::VirusDengue():Virus()
 {
-	DoBorn();
-	InitResistance();
+	VirusDengue::DoBorn();
+	VirusDengue::InitResistance();
 }
 
-char* VirusDengue::Getm_protein()
+VirusDengue::VirusDengue(const VirusDengue *virusdengue):Virus(virusdengue)
 {
-	return m_protein;
+	this->m_protein[4] = virusdengue->m_protein[4];
+}
+
+char* VirusDengue::Getprotein()
+{
+	return this->m_protein;
+}
+
+void VirusDengue::Setprotein(char a[4])
+{
+	strcpy_s(m_protein, a);
 }
 
 void VirusDengue::DoBorn()
 {
-	LoadADNInformation();
+	Virus::LoadADNInformation();
 	int rd = rand() % 3 + 1;
 	if (rd == 1)
 	{
-		strcpy(m_protein, "NS3");
+		cout << "NS3 ";
+		Setprotein("NS3");
 	}
 	else
 	{
 		if (rd == 2)
 		{
-			strcpy(m_protein, "NS5");
+			cout << "NS5 ";
+			Setprotein("NS5");
 		}
 		else
 		{
-			strcpy(m_protein, "E");
+			cout << "E ";
+			Setprotein("E");
 		}
 	}
 }
-Virus* VirusDengue::DoClone(Virus *vr)
-{
 
+list<Virus *> VirusDengue::DoClone()
+{
+	cout << "clone VirusDengue\n";
+	VirusDengue *newvr = new VirusDengue(this);
+	list<Virus *> newlistvr;
+	newlistvr.push_back(newvr);
+	newvr = new VirusDengue(this);
+	newlistvr.push_back(newvr);
+	return newlistvr;
 }
+
 
 void VirusDengue::DoDie()
 {
-
+	delete this;
 }
+
 
 void VirusDengue::InitResistance()
 {
-	if (Getm_protein() == "NS3")
+	if (Getprotein() == "NS3")
 	{
-		Setm_resistance(rand() % 10 + 1);
+		Setresistance(rand() % 10 + 1);
 	}
 	else
 	{
-		if (strcmp(Getm_protein(),"NS5"))
+		if (strcmp(Getprotein(),"NS5"))
 		{
-			Setm_resistance(rand() % 10 + 11);
+			Setresistance(rand() % 10 + 11);
 		}
 		else
 		{
-			Setm_resistance(rand() % 10 + 21);
+			Setresistance(rand() % 10 + 21);
 		}
 	}
 }

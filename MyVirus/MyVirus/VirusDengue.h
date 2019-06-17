@@ -1,15 +1,19 @@
 #pragma once
 #include "Virus.h"
+#include <string>
+
 class VirusDengue:public Virus
 {
 private:
 	char m_protein[4];
 public:
 	VirusDengue();
-	char* Getm_protein();
+	VirusDengue(const VirusDengue *virusdengue);
+	char* Getprotein();
+	void Setprotein(char a[4]);
 	~VirusDengue();
 	void DoBorn();
-	Virus* DoClone(Virus *vr);
+	list<Virus*> DoClone();
 	void DoDie();
 	void InitResistance();
 };
