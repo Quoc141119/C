@@ -22,6 +22,7 @@
     <ProjectGuid>{AEE2D204-08F2-4599-8901-D344EFB3B754}</ProjectGuid>
     <RootNamespace>MyVirus</RootNamespace>
     <WindowsTargetPlatformVersion>8.1</WindowsTargetPlatformVersion>
+    <ProjectName>MyVirut</ProjectName>
   </PropertyGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" Label="Configuration">
@@ -110,6 +111,17 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClInclude Include="Patient.h" />
+    <ClInclude Include="Virus.h" />
+    <ClInclude Include="VirusDengue.h" />
+    <ClInclude Include="VirusFlu.h" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="Patient.cpp" />
+    <ClCompile Include="Source.cpp" />
+    <ClCompile Include="Virus.cpp" />
+    <ClCompile Include="VirusDengue.cpp" />
+    <ClCompile Include="VirusFlu.cpp" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
