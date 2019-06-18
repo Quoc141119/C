@@ -11,7 +11,10 @@ VirusDengue::VirusDengue():Virus()
 
 VirusDengue::VirusDengue(const VirusDengue *virusdengue):Virus(virusdengue)
 {
-	this->m_protein[4] = virusdengue->m_protein[4];
+	for (int i = 0; i < strlen(virusdengue->m_protein); i++)
+	{
+		this->m_protein[i] = virusdengue->m_protein[i];
+	}
 }
 
 char* VirusDengue::Getprotein()
@@ -21,7 +24,7 @@ char* VirusDengue::Getprotein()
 
 void VirusDengue::Setprotein(char a[4])
 {
-	strcpy_s(m_protein, a);
+	strcpy_s(this->m_protein, a);
 }
 
 void VirusDengue::DoBorn()
